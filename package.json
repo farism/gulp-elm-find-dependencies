@@ -5,17 +5,14 @@
   "main": "index.js",
   "scripts": {
     "precommit": "lint-staged",
-    "pretty": "prettier --write --no-semi --single-quote --trailing-comma all",
+    "pretty": "prettier --write --no-semi --single-quote --trailing-comma es5",
     "test": "mocha ./test/**.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/farism/gulp-elm-find-dependencies.git"
   },
-  "keywords": [
-    "gulpplugin",
-    "elm"
-  ],
+  "keywords": ["gulpplugin", "elm"],
   "author": "Faris Mustafa <farismmk@gmail.com>",
   "license": "MIT",
   "bugs": {
