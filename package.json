@@ -8,12 +8,6 @@
     "pretty": "prettier --write",
     "test": "mocha ./test/**.js"
   },
-  "lint-staged": {
-    "**/*.js": [
-      "npm run pretty",
-      "git add"
-    ]
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/farism/gulp-elm-find-dependencies.git"
