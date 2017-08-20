@@ -29,7 +29,7 @@ describe('gulp-elm-find-dependencies', function() {
       new File({
         path: fixture('Main.elm'),
         contents: fs.readFileSync(fixture('Main.elm')),
-      }),
+      })
     )
     stream.end()
   })
@@ -38,7 +38,7 @@ describe('gulp-elm-find-dependencies', function() {
     stream
       .once('error', function(err) {
         expect(err.message).to.eql(
-          'gulp-elm-find-dependencies: Streaming not supported',
+          'gulp-elm-find-dependencies: Streaming not supported'
         )
       })
       .pipe(assert.end(done))
