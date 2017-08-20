@@ -1,7 +1,7 @@
 {
   "name": "gulp-elm-find-dependencies",
   "version": "0.1.0",
-  "description": "A gulp plugin wrapping the find-elm-dependencies module that returns the deps as vinyl objects",
+  "description": "A gulp plugin wrapping the find-elm-dependencies module",
   "main": "index.js",
   "scripts": {
     "precommit": "lint-staged",
