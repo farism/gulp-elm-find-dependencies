@@ -1,21 +1,21 @@
 const { findAllDependencies } = require('find-elm-dependencies')
-const gutil = require('gulp-util')
-const through = require('through2')
+const File = require('vinyl')
+const fs = require('fs')
 const path = require('path')
+const through = require('through2')
 
 const PLUGIN = 'gulp-elm-find-dependencies'
 
 module.exports = function() {
   const transform = function(file, encode, callback) {
     if (file.isNull()) {
-      this.push(file)
       return callback()
     }
 
     if (file.isStream()) {
       this.emit(
         'error',
-        new gutil.PluginError(PLUGIN, 'Streams are not supported!'),
+        new Error('gulp-elm-find-dependencies: Streaming not supported'),
       )
       return callback()
     }
@@ -29,7 +29,7 @@ module.exports = function() {
             return new Promise((resolve, reject) => {
               fs.readFile(dep, (err, contents) => {
                 this.push(
-                  new gutil.File({
+                  new File({
                     cwd: process.cwd(),
                     path: dep,
                     contents,
