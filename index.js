@@ -22,6 +22,8 @@ module.exports = function() {
 
     this.push(file)
 
+
+
     findAllDependencies(file.path)
       .then(deps => {
         return Promise.all(
