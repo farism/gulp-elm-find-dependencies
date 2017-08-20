@@ -46,6 +46,9 @@ module.exports = function() {
       .then(function() {
         callback()
       })
+      .catch(function(e) {
+        callback()
+      })
   }
 
   return through.obj(transform)
