@@ -1,6 +1,6 @@
 /* global describe, it */
 
-const { expect } = require('chai')
+const expect = require('chai').expect
 const assert = require('stream-assert')
 const File = require('vinyl')
 const fs = require('fs')
@@ -8,16 +8,18 @@ const path = require('path')
 
 const findElmDependencies = require('../')
 
-const fixture = glob => path.join(__dirname, 'fixture', 'src', glob)
+const fixture = function(glob) {
+  return path.join(__dirname, 'fixture', 'src', glob)
+}
 
-describe('gulp-elm-find-dependencies', () => {
-  let stream
+describe('gulp-elm-find-dependencies', function() {
+  var stream
 
-  beforeEach(() => {
+  beforeEach(function() {
     stream = findElmDependencies()
   })
 
-  it('should work in buffer mode', done => {
+  it('should work in buffer mode', function(done) {
     stream
       .pipe(assert.nth(0, dep => expect(dep.path).to.eql(fixture('Main.elm'))))
       .pipe(assert.nth(1, dep => expect(dep.path).to.eql(fixture('Dep.elm'))))
@@ -34,15 +36,19 @@ describe('gulp-elm-find-dependencies', () => {
 
   it('should emit error on streamed file', done => {
     stream
-      .once('error', err => {
+      .once('error', function(err) {
         expect(err.message).to.eql(
           'gulp-elm-find-dependencies: Streaming not supported',
         )
       })
       .pipe(assert.end(done))
     stream.write({
-      isNull: () => false,
-      isStream: () => true,
+      isNull: function() {
+        return false
+      },
+      isStream: function() {
+        return true
+      },
     })
     stream.end()
   })

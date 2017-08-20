@@ -1,5 +1,5 @@
-const { findAllDependencies } = require('find-elm-dependencies')
 const File = require('vinyl')
+const findAllDependencies = require('find-elm-dependencies').findAllDependencies
 const fs = require('fs')
 const path = require('path')
 const through = require('through2')
@@ -20,15 +20,17 @@ module.exports = function() {
       return callback()
     }
 
-    this.push(file)
+    const _this = this
+
+    _this.push(file)
 
     findAllDependencies(file.path)
-      .then(deps => {
+      .then(function(deps) {
         return Promise.all(
-          deps.map(dep => {
-            return new Promise((resolve, reject) => {
-              fs.readFile(dep, (err, contents) => {
-                this.push(
+          deps.map(function(dep) {
+            return new Promise(function(resolve, reject) {
+              fs.readFile(dep, function(err, contents) {
+                _this.push(
                   new File({
                     cwd: process.cwd(),
                     path: dep,
@@ -41,7 +43,9 @@ module.exports = function() {
           }),
         )
       })
-      .then(() => callback())
+      .then(function() {
+        callback()
+      })
   }
 
   return through.obj(transform)
