@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "precommit": "lint-staged",
-    "pretty": "prettier --write",
+    "pretty": "prettier --write --no-semi --single-quote --trailing-comma all",
     "test": "mocha ./test/**.js"
   },
   "repository": {
