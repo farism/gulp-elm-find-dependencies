@@ -5,11 +5,12 @@
   "main": "index.js",
   "scripts": {
     "precommit": "lint-staged",
+    "pretty": "prettier --write",
     "test": "mocha ./test/**.js"
   },
   "lint-staged": {
-    "*.js": [
-      "prettier --write --no-semi --single-quote --trailing-comma all",
+    "**/*.js": [
+      "npm run pretty",
       "git add"
     ]
   },
