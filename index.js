@@ -15,7 +15,7 @@ module.exports = function() {
     if (file.isStream()) {
       this.emit(
         'error',
-        new Error('gulp-elm-find-dependencies: Streaming not supported'),
+        new Error('gulp-elm-find-dependencies: Streaming not supported')
       )
       return callback()
     }
@@ -35,12 +35,12 @@ module.exports = function() {
                     cwd: process.cwd(),
                     path: dep,
                     contents,
-                  }),
+                  })
                 )
                 resolve()
               })
             })
-          }),
+          })
         )
       })
       .then(function() {
