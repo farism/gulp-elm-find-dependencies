@@ -30,14 +30,18 @@ module.exports = function() {
           deps.map(function(dep) {
             return new Promise(function(resolve, reject) {
               fs.readFile(dep, function(err, contents) {
-                _this.push(
-                  new File({
-                    cwd: process.cwd(),
-                    path: dep,
-                    contents,
-                  })
-                )
-                resolve()
+                if (err) {
+                  reject(err)
+                } else {
+                  _this.push(
+                    new File({
+                      cwd: process.cwd(),
+                      path: dep,
+                      contents,
+                    })
+                  )
+                  resolve()
+                }
               })
             })
           })
